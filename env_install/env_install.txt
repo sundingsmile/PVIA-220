@@ -1,0 +1,8 @@
+pytest-ordering
+pytest-rerunfailures
+pytest-html
+allure-pytest
+pytest-xdist
+
+运行命令：pip install -r ./env_install/env_install.txt
+执行命令时将7、8行删除
