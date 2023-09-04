@@ -105,10 +105,45 @@ import json
 #     json.dump(dict,ff)
 
 
-import os
+# import os
+#
+# current_dir = os.getcwd()
+# parent_dir = os.path.dirname(current_dir)
+#
+# print("当前目录:", current_dir)
+# print("父目录:", parent_dir)
 
-current_dir = os.getcwd()
-parent_dir = os.path.dirname(current_dir)
 
-print("当前目录:", current_dir)
-print("父目录:", parent_dir)
+import requests
+from bs4 import BeautifulSoup
+import time
+import schedule
+
+def get_train_info(date, from_station, to_station):
+    url = f"https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date={date}&leftTicketDTO.from_station={from_station}&leftTicketDTO.to_station={to_station}&purpose_codes=ADULT"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+    }
+    response = requests.get(url, headers=headers)
+    result = response.json()
+    trains = result["data"]["result"]
+    for train in trains:
+        train_info = train.split("|")
+        print(f"车次：{train_info[3]}，出发站：{train_info[6]}，到达站：{train_info[7]}，出发时间：{train_info[8]}，到达时间：{train_info[9]}，余票：{train_info[20]}，票价：{train_info[23]}元")
+
+def monitor_ticket_price():
+    date = input("请输入查询日期（格式：yyyy-mm-dd）：")
+    from_station = input("请输入出发站：")
+    to_station = input("请输入到达站：")
+    get_train_info(date, from_station, to_station)
+
+def remind_ticket():
+    # 在这里添加提醒用户购票的逻辑，例如发送邮件或者短信提醒
+    pass
+    print('=======')
+
+schedule.every().day.at("10:54").do(monitor_ticket_price)
+
+while True:
+    schedule.run_pending()
+    time.sleep(10)
