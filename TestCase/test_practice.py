@@ -85,20 +85,7 @@ class TestB():
 #         print('test_b')
 #         assert False
 
-'''
-=================================================
-allure报告配置
-=================================================
-'''
-def get_report_dir():
-    current_dir = os.getcwd()
-    parent_dir = os.path.dirname(current_dir)
-    report_dir = os.path.join(parent_dir, r'report\allure_report\html-report\widgets\summary.json')
-    with open(report_dir,encoding='utf-8',mode='r+') as f:
-        ss =  json.load(f)
-        ss['reportName'] = '中国万岁'
-        f.seek(0)
-        json.dump(ss,f,ensure_ascii=False, indent=4)
+
 
 
 if __name__ == '__main__':

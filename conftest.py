@@ -99,7 +99,7 @@ from configparser import ConfigParser
 
 '''读取配置文件信息'''
 setting_content = ConfigParser()
-setting_content.read('../pytest.ini',encoding='UTF-8')
+setting_content.read('./pytest.ini',encoding='UTF-8')
 
 '''显示环境信息'''
 def pytest_configure(config):
