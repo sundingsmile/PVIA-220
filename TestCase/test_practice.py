@@ -62,7 +62,7 @@ class TestB():
     #     print('test_a')
     #     assert a == b
 
-    @allure.step('好好玩')
+    @allure.step('Jenkins测试')
     def test_b(self,request):
         print('test_b' + '===')
         # print(dir(request))
