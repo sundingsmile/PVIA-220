@@ -50,6 +50,6 @@ if __name__ == '__main__':
     =================================================
     '''
     # pytest.main(['-vs','./','--html=../report/pytest_html_report/report.html','--capture=tee-sys'])
-    os.system('pytest -vs --env=test ./TestCase/test_practice.py --alluredir  ./report/allure_report/temp')
+    os.system('pytest -vs --env=test ./TestCase/test_practice.py --alluredir ./report/allure_report/temp')
     os.system('allure  generate ./report/allure_report/temp -o ./report/allure_report/html-report --clean')
     get_report_dir()
