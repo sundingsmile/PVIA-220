@@ -60,6 +60,7 @@ class TestB():
     # @pytest.mark.parametrize('a,b',[(1,1)])
     def test_a(self):
         print('test_a')
+        print('我觉得我还是可以的，不算笨')
         assert 3==2
 
     @allure.step('Jenkins测试')
