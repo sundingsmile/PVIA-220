@@ -58,9 +58,9 @@ class TestB():
     # @allure.story('我是storyTESTB')
     # @allure.step('我是step-TESTB')
     # @pytest.mark.parametrize('a,b',[(1,1)])
-    # def test_a(self,a,b):
-    #     print('test_a')
-    #     assert a == b
+    def test_a(self,a,b):
+        print('test_a')
+        assert a == b
 
     @allure.step('Jenkins测试')
     def test_b(self,request):
