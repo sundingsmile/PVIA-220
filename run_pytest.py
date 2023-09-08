@@ -17,7 +17,7 @@ def get_report_dir():
     report_dir = os.path.join(current_dir, r'report\allure_report\html-report\widgets\summary.json')
     with open(report_dir,encoding='utf-8',mode='r+') as f:
         ss =  json.load(f)
-        ss['reportName'] = '中国万岁'
+        ss['reportName'] = '海康威视'
         f.seek(0)
         json.dump(ss,f,ensure_ascii=False, indent=4)
 
