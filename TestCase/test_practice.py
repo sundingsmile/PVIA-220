@@ -60,7 +60,7 @@ class TestB():
     # @pytest.mark.parametrize('a,b',[(1,1)])
     def test_a(self,a,b):
         print('test_a')
-        assert a == b and 1==1
+        assert a == b and 1==2
 
     @allure.step('Jenkins测试')
     def test_b(self,request):
