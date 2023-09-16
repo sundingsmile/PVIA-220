@@ -32,6 +32,10 @@ if __name__ == '__main__':
     --env=test 执行测试环境配置信息，跟conftest.py脚本中内容相关
     PVIA_220_PYTEST_AUTO.py::Test_PVIA_220_MODIFY_230818::test_test 执行指定类中的测试
     -vs 显示具体执行过程，打印脚本中的打印信息
+    --env选择配置环境信息
+        test测试环境，使用的配置文件config/test/config.yaml
+        dev开发环境，使用的配置文件config/dev/config.yaml
+        prod正式环境，使用的配置文件config/prod/config.yaml
     =================================================
     '''
     # os.system('pytest -vs --env=test ./PVIA_220_PYTEST_AUTO.py -W ignore --reruns=2 -m smoke')
@@ -42,7 +46,8 @@ if __name__ == '__main__':
     生成pytest_html报告
     ================================================
     '''
-    # os.system('pytest --html=./report/report_name.html PVIA_220_PYTEST_AUTO.py::Test_PVIA_220_MODIFY_230818::test_test')
+    os.system('pytest -vs --env=test --html=./report/report_name.html ./TestCase/PVIA_220_PYTEST_AUTO.py::Test_PVIA_220_MODIFY_230818::test_test')
+    # os.system('pytest -vs --env=prod --html=./report/report_name.html ./TestCase/PVIA_220_PYTEST_AUTO.py')
 
     '''
     =================================================
@@ -50,6 +55,6 @@ if __name__ == '__main__':
     =================================================
     '''
     # pytest.main(['-vs','./','--html=../report/pytest_html_report/report.html','--capture=tee-sys'])
-    os.system('pytest -vs --env=test ./TestCase/test_practice.py --alluredir ./report/allure_report/temp')
-    os.system('allure  generate ./report/allure_report/temp -o ./report/allure_report/html-report --clean')
-    get_report_dir()
+    # os.system('pytest -vs --env=test ./TestCase/test_practice.py --alluredir ./report/allure_report/temp')
+    # os.system('allure  generate ./report/allure_report/temp -o ./report/allure_report/html-report --clean')
+    # get_report_dir()

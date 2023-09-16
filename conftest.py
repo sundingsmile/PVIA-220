@@ -52,6 +52,7 @@ def env(pytestconfig):
 #         env_config = yaml.load(f, Loader=yaml.SafeLoader)
 #     return env_config
 
+'''根据--env输入参数，选择测试数据；还不能使用，由于不知道怎么将夹具中返回的数据应用到pytest.mark.parametrize中'''
 # @pytest.fixture(scope='session',autouse=True)
 # def data(pytestconfig):
 #     if pytestconfig.getoption('--env') == 'test':
@@ -69,6 +70,23 @@ def env(pytestconfig):
 #     return final_data
 
 
+
+
+'''
+=================================================
+pytest-html报告优化配置
+=================================================
+'''
+from py._xmlgen import html
+from datetime import datetime
+from pytest_metadata.plugin import metadata_key
+from _pytest.config import Config
+from configparser import ConfigParser
+
+'''读取配置文件信息'''
+setting_content = ConfigParser()
+setting_content.read('./pytest.ini',encoding='UTF-8')
+
 '''
     1、修复pytest-html文件中文乱码问题
     2、注意：如果想此处起作用，还需修改D:\\Program Files\\python3.9.13\\Lib\\pathlib.py文件中的write_text函数的编码为UTF-8,
@@ -85,21 +103,6 @@ def env(pytestconfig):
 def pytest_itemcollected(item):
     # 把case中的三引号注释输出到输出中的用例列表
     item._nodeid = item._nodeid.encode("UTF-8").decode("UTF-8")
-
-'''
-=================================================
-pytest-html报告优化配置
-=================================================
-'''
-from py._xmlgen import html
-from datetime import datetime
-from pytest_metadata.plugin import metadata_key
-from _pytest.config import Config
-from configparser import ConfigParser
-
-'''读取配置文件信息'''
-setting_content = ConfigParser()
-setting_content.read('./pytest.ini',encoding='UTF-8')
 
 '''显示环境信息'''
 def pytest_configure(config):

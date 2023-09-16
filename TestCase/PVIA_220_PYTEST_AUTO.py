@@ -206,9 +206,10 @@ class Test_PVIA_220_MODIFY_230818():
     # @pytest.mark.parametrize('a', )
     @pytest.mark.run(order=1)
     @pytest.mark.smoke
-    def test_test(self):
+    def test_test(self,data):
         print('+'*15 + 'test_test' + '+'*15)
         print('&'*20)
+        print(data)
         assert 0
 
 
