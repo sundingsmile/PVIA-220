@@ -1,0 +1,13 @@
+---
+login:
+  - case: 正向测试用例
+    username: ys-dev
+    password: Abc24680
+    expected:
+        response: 演示用户
+        
+  - case: 反向测试用例
+    username: admin-dev
+    password: 12345
+    expected:
+        response: NO TEST
