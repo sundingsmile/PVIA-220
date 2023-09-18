@@ -52,7 +52,10 @@ def env(pytestconfig):
 #         env_config = yaml.load(f, Loader=yaml.SafeLoader)
 #     return env_config
 
-# '''根据--env输入参数，选择测试数据；还不能使用，由于不知道怎么将夹具中返回的数据应用到pytest.mark.parametrize中'''
+'''
+根据--env输入参数，选择测试数据；还不能使用，由于不知道怎么将夹具中返回的数据应用到pytest.mark.parametrize中，暂时用函数打开
+数据文件进行测试
+'''
 # @pytest.fixture(scope='session',autouse=True)
 # def data(pytestconfig):
 #     if pytestconfig.getoption('--env') == 'test':
