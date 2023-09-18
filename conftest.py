@@ -52,11 +52,11 @@ def env(pytestconfig):
 #         env_config = yaml.load(f, Loader=yaml.SafeLoader)
 #     return env_config
 
-'''根据--env输入参数，选择测试数据；还不能使用，由于不知道怎么将夹具中返回的数据应用到pytest.mark.parametrize中'''
+# '''根据--env输入参数，选择测试数据；还不能使用，由于不知道怎么将夹具中返回的数据应用到pytest.mark.parametrize中'''
 # @pytest.fixture(scope='session',autouse=True)
 # def data(pytestconfig):
 #     if pytestconfig.getoption('--env') == 'test':
-#         data_path = os.path.join(pytestconfig.rootdir, "data", pytestconfig.getoption('--env'), "data_in_test.yaml")
+#         data_path = os.path.join(pytestconfig.rootdir, "data", pytestconfig.getoption('--env'), "data_dev.yaml")
 #     elif pytestconfig.getoption('--env') == 'dev':
 #         data_path = os.path.join(pytestconfig.rootdir, "data", pytestconfig.getoption('--env'), "data_in_dev.yaml")
 #     elif pytestconfig.getoption('--env') == 'prod':
@@ -68,6 +68,7 @@ def env(pytestconfig):
 #         data = yaml.load(f, Loader=yaml.SafeLoader)
 #         final_data = [(data['username'], data['password'], data['expected']['response']) for data in data['login']]
 #     return final_data
+
 
 
 
@@ -127,11 +128,11 @@ def pytest_html_results_table_header(cells):
     cells.remove(html.th('Duration'))
 #
 '''修改result表格的行'''
-def pytest_html_results_table_row(report, cells):
-    cells.insert(2, html.td(report.description))  # 插入用例描述
-    cells.insert(3, html.td(datetime.now(),class_="col-time"))  # 插入时间
-    cells.pop()  # 删除Links行
-    cells.pop()  # 删除Duration行
+# def pytest_html_results_table_row(report, cells):
+#     cells.insert(2, html.td(report.description))  # 插入用例描述
+#     cells.insert(3, html.td(datetime.now(),class_="col-time"))  # 插入时间
+#     cells.pop()  # 删除Links行
+#     cells.pop()  # 删除Duration行
 
 '''收集测试用例介绍，并且解决测试用例名称中包含中文乱码问题'''
 @pytest.hookimpl(hookwrapper=True)

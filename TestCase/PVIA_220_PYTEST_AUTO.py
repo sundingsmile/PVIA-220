@@ -5,7 +5,8 @@ coding:utf-8
 @Author: Smile
 '''
 
-import time,pytest,os,pyautogui,datetime,yaml
+import time,pytest,os,pyautogui,datetime,yaml,sys
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,7 +15,21 @@ from selenium.webdriver import ActionChains
 from pynput.keyboard import Controller
 from utils import commlib
 
-
+'''
+=================================================
+通过输入的--env参数，选择使用测试数据
+test：测试数据
+prod：正式数据
+dev：开发环境数据
+=================================================
+'''
+def get_test_data():
+    for arg in sys.argv:
+        if arg.find('--env') != -1:
+            with open(os.path.join('./data',arg.split('=')[1],"data_" + arg.split('=')[1] + ".yaml")) as f:
+                data = yaml.load(f, Loader=yaml.SafeLoader)
+                final_data = [(data['username'], data['password'], data['expected']['response']) for data in data['login']]
+    return final_data
 
 @pytest.mark.skip
 class Test_PVIA_220():
@@ -167,8 +182,8 @@ class Test_PVIA_220():
 class Test_PVIA_220_MODIFY_230818():
 
     '''登录测试用例'''
-    # @pytest.mark.skip
-    @pytest.mark.parametrize('username,password,expected',[('ys', 'Abc24680', '演示用户'), ('admin', 12345, '用户名或密码错误')])
+    @pytest.mark.skip
+    # @pytest.mark.parametrize('username,password,expected',get_test_data())
     def test_login(self,username,password,expected,env):
         Chrome_ie = webdriver.Edge()
         Chrome_ie.maximize_window()
@@ -200,16 +215,21 @@ class Test_PVIA_220_MODIFY_230818():
 
 
 
+
     '''验证问题专用程序'''
+    # @pytest.mark.run(order=1)
+    # @pytest.mark.parametrize('user,pwd,expected',,params)
     # @pytest.mark.skip
-    # @pytest.mark.usefixtures('env')
-    # @pytest.mark.parametrize('a', )
-    @pytest.mark.run(order=1)
-    @pytest.mark.smoke
-    def test_test(self,data):
+    def test_test(self):
         print('+'*15 + 'test_test' + '+'*15)
+        print(sys.argv)
+        print(pytest.get_config())
+        print('+++++++++++++++++++++')
+
+
+        # print(get_test_data())
+
         print('&'*20)
-        print(data)
         assert 0
 
 

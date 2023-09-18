@@ -5,7 +5,7 @@ coding:utf-8
 @Author: Smile
 '''
 
-import pytest,os,json
+import os,json,pytest
 
 '''
 =================================================
@@ -20,6 +20,7 @@ def get_report_dir():
         ss['reportName'] = '海康威视'
         f.seek(0)
         json.dump(ss,f,ensure_ascii=False, indent=4)
+
 
 if __name__ == '__main__':
 
@@ -36,18 +37,19 @@ if __name__ == '__main__':
         test测试环境，使用的配置文件config/test/config.yaml
         dev开发环境，使用的配置文件config/dev/config.yaml
         prod正式环境，使用的配置文件config/prod/config.yaml
+    请使用os.system的方式运行，否则将会出现获取测试数据失败的问题
     =================================================
     '''
     # os.system('pytest -vs --env=test ./PVIA_220_PYTEST_AUTO.py -W ignore --reruns=2 -m smoke')
-    # pytest.main(['-vs','--env=test','./PVIA_220_PYTEST_AUTO.py', '-W ignore','--reruns=2','-m smoke'])
+    # pytest.main(['-vs','--env=test','./TestCase/PVIA_220_PYTEST_AUTO.py::Test_PVIA_220_MODIFY_230818::test_test', '--html=./report/pytest_html_report/report_name.html'])
 
     '''
     =================================================
     生成pytest_html报告
     ================================================
     '''
-    os.system('pytest -vs --env=test --html=./report/report_name.html ./TestCase/PVIA_220_PYTEST_AUTO.py::Test_PVIA_220_MODIFY_230818::test_test')
-    # os.system('pytest -vs --env=prod --html=./report/report_name.html ./TestCase/PVIA_220_PYTEST_AUTO.py')
+    # os.system('pytest -vs --env=test --html=./report/report_name.html ./TestCase/PVIA_220_PYTEST_AUTO.py::Test_PVIA_220_MODIFY_230818::test_test')
+    os.system('pytest -vs --env=test ./TestCase/PVIA_220_PYTEST_AUTO.py --html=./report/pytest_html_report/report_name.html')
 
     '''
     =================================================
@@ -57,4 +59,3 @@ if __name__ == '__main__':
     # pytest.main(['-vs','./','--html=../report/pytest_html_report/report.html','--capture=tee-sys'])
     # os.system('pytest -vs --env=test ./TestCase/test_practice.py --alluredir ./report/allure_report/temp')
     # os.system('allure  generate ./report/allure_report/temp -o ./report/allure_report/html-report --clean')
-    # get_report_dir()
